@@ -1,5 +1,5 @@
 pandas
 numpy
-plotly.graph_objects
-matplotlib.pyplot
-scipy.signal
+plotly
+matplotlib
+scipy
