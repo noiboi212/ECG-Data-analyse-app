@@ -6,26 +6,7 @@ import streamlit as st
 import math
 import os
 import random
-
-def gen_data(data, amount, add_val = 1):
-    '''
-    generates an amount of new rows with vallues that exist in each column 
-    data(dataframe): original data set
-    amount(int): amount of new rows
-    add_val(array): vallues to add 
     
-    returns: data set with aditional rows 
-    '''
-    cols = list(data.columns)
-    new_data = pd.DataFrame(columns = [cols])
-    
-    for col in cols:
-        vals = data[col].value_counts()
-        #new_data[col] = random.choices(vals.index, vals['count'], k=amount)
-        return vals
-    return new_data
-    
-
 def fft_filter(data, d = 150, band = [0,200]):
     '''
     fourier transform filter
@@ -57,7 +38,8 @@ def detect_peaks(data, timestamps, distance = 1):
     
     returns: dataframe with peak timestamps and vallues
     '''
-    peak_index, _ = find_peaks(data, distance = distance)
+    thresh = max(data)*0.4
+    peak_index, _ = find_peaks(data, distance = distance, height = thresh)
     
     peaks = pd.DataFrame(timestamps.iloc[peak_index])
     peaks['value'] = data.iloc[peak_index]
