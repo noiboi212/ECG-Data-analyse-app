@@ -28,7 +28,7 @@ def fft_filter(data, d = 150, band = [0,200]):
     return data
 
 
-def detect_peaks(data, timestamps, distance = 1):
+def detect_peaks(data, timestamps, distance = 1, thresh = 0.4):
     '''
     creates a data frame containing all peaks and timestamps
     
@@ -38,7 +38,7 @@ def detect_peaks(data, timestamps, distance = 1):
     
     returns: dataframe with peak timestamps and vallues
     '''
-    thresh = max(data)*0.4
+    thresh = max(data)*thresh
     peak_index, _ = find_peaks(data, distance = distance, height = thresh)
     
     peaks = pd.DataFrame(timestamps.iloc[peak_index])
