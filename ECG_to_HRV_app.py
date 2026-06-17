@@ -30,7 +30,7 @@ if st.button('read file'):
     
     
     data['filtered'] = da.fft_filter(data['ECG'], d = 1000, band = [40,200])
-    peaks = da.detect_peaks(data['filtered'], data['time'], distance = distance, thresh = 0.5)
+    peaks = da.detect_peaks(data['filtered'], data['time'], distance = distance, thresh = 0.4)
     peaks['bpm'] = da.calculate_bpm(peaks['time'], smooth = 5)
     
     avg_bpm = peaks['bpm'].mean()
